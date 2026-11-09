@@ -3,13 +3,16 @@ import { useState } from 'react'
 const emptyMovie = {
   title: '',
   description: '',
+  trailerUrl: '',
   posterUrl: '',
   rating: '',
 }
 
 function MovieForm({ isOpen, editingMovie, onSave, onClose }) {
   const [values, setValues] = useState(() => (
-    editingMovie ? { ...editingMovie, rating: String(editingMovie.rating) } : emptyMovie
+    editingMovie
+      ? { ...emptyMovie, ...editingMovie, trailerUrl: editingMovie.trailerUrl ?? '', rating: String(editingMovie.rating) }
+      : emptyMovie
   ))
 
   if (!isOpen) return null
@@ -22,9 +25,16 @@ function MovieForm({ isOpen, editingMovie, onSave, onClose }) {
   const handleSubmit = (event) => {
     event.preventDefault()
     const rating = Number(values.rating)
-    if (!values.title.trim() || !values.description.trim() || !values.posterUrl.trim()) return
+    if (!values.title.trim() || !values.description.trim() || !values.trailerUrl.trim() || !values.posterUrl.trim()) return
     if (Number.isNaN(rating) || rating < 0 || rating > 10) return
-    onSave({ ...values, title: values.title.trim(), description: values.description.trim(), posterUrl: values.posterUrl.trim(), rating })
+    onSave({
+      ...values,
+      title: values.title.trim(),
+      description: values.description.trim(),
+      trailerUrl: values.trailerUrl.trim(),
+      posterUrl: values.posterUrl.trim(),
+      rating,
+    })
   }
 
   return (
@@ -45,6 +55,10 @@ function MovieForm({ isOpen, editingMovie, onSave, onClose }) {
           <label>
             Description
             <textarea name="description" value={values.description} onChange={handleChange} placeholder="Un court résumé du film..." rows="4" required />
+          </label>
+          <label>
+            Lien intégré de la bande-annonce
+            <input name="trailerUrl" value={values.trailerUrl} onChange={handleChange} type="url" placeholder="https://www.youtube.com/embed/..." required />
           </label>
           <label>
             URL de l'affiche

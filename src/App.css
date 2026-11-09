@@ -19,7 +19,7 @@
   z-index: 20;
 }
 
-.brand { display: flex; align-items: center; gap: 10px; border: 0; background: none; color: #f5f7fb; font-weight: 800; letter-spacing: .12em; }
+.brand { display: flex; align-items: center; gap: 10px; border: 0; background: none; color: #f5f7fb; font-weight: 800; letter-spacing: .12em; text-decoration: none; }
 .brand-mark { width: 38px; height: 38px; display: grid; place-items: center; border-radius: 10px; background: linear-gradient(135deg, #4e7cff, #7c5cff); box-shadow: 0 8px 24px rgba(90,111,255,.25); font-size: 20px; letter-spacing: 0; }
 
 .add-button, .submit-button { border: 0; border-radius: 10px; color: white; background: #5577f2; font-weight: 750; height: 44px; padding: 0 18px; box-shadow: 0 10px 30px rgba(64,91,211,.18); }
@@ -41,14 +41,15 @@
 .movie-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 22px; }
 .movie-card { overflow: hidden; border-radius: 16px; border: 1px solid rgba(255,255,255,.07); background: linear-gradient(145deg, #151b27, #111620); box-shadow: 0 18px 45px rgba(0,0,0,.18); transition: transform .25s ease, border-color .25s ease; }
 .movie-card:hover { transform: translateY(-5px); border-color: rgba(103,126,220,.38); }
+.movie-card-link { display: block; color: inherit; text-decoration: none; }
 .poster-wrap { height: 310px; position: relative; overflow: hidden; background: #1a202d; }
 .poster-wrap::after { content: ""; position: absolute; inset: auto 0 0; height: 34%; background: linear-gradient(transparent, rgba(8,11,16,.82)); }
 .poster-wrap img { width: 100%; height: 100%; object-fit: cover; display: block; }
 .rating-badge { position: absolute; right: 14px; bottom: 14px; z-index: 2; height: 34px; display: flex; align-items: center; gap: 5px; padding: 0 10px; border-radius: 8px; color: #f9d35b; background: rgba(10,13,20,.88); font-weight: 800; backdrop-filter: blur(8px); }
 .movie-info { padding: 18px; }
 .movie-info h3 { margin: 0 0 8px; color: #f1f4fa; font-size: 18px; }
-.movie-info p { height: 54px; margin: 0 0 16px; color: #929daf; font-size: 13px; line-height: 1.45; overflow: hidden; }
-.card-actions { display: flex; gap: 8px; }
+.movie-info p { height: 54px; margin: 0; color: #929daf; font-size: 13px; line-height: 1.45; overflow: hidden; }
+.card-actions { display: flex; gap: 8px; padding: 0 18px 18px; }
 .icon-button { flex: 1; height: 38px; border-radius: 8px; border: 1px solid rgba(255,255,255,.08); background: #1b2230; color: #bdc6d6; font-size: 13px; font-weight: 700; }
 .edit-button:hover { border-color: #5577f2; color: white; }
 .delete-button:hover { border-color: rgba(234,91,111,.45); color: #ff8e9d; }
@@ -72,8 +73,24 @@
 .form-actions { display: flex; justify-content: flex-end; gap: 10px; padding-top: 5px; }
 .cancel-button { height: 44px; padding: 0 18px; border-radius: 10px; border: 1px solid rgba(255,255,255,.09); color: #bdc6d4; background: transparent; }
 
+.detail-page { min-height: calc(100vh - 74px); }
+.back-link { display: inline-flex; margin-bottom: 28px; color: #9fb3ff; font-weight: 700; text-decoration: none; }
+.back-link:hover { color: #d3dcff; }
+.detail-layout { display: grid; grid-template-columns: minmax(220px, 340px) minmax(0, 1fr); align-items: start; gap: 38px; }
+.detail-poster { display: block; width: 100%; max-height: 500px; object-fit: cover; border-radius: 16px; box-shadow: 0 18px 45px rgba(0,0,0,.3); }
+.detail-copy { padding-top: 12px; }
+.detail-copy h1 { margin: 10px 0 30px; color: #f1f4fa; font-size: clamp(32px, 5vw, 52px); line-height: 1.08; letter-spacing: -.04em; }
+.detail-copy h2, .trailer-section h2 { color: #f1f4fa; }
+.detail-copy p, .trailer-unavailable { color: #aab4c5; font-size: 16px; line-height: 1.7; }
+.trailer-section { margin-top: 48px; }
+.trailer-section h2 { margin-bottom: 18px; }
+.trailer-frame { position: relative; overflow: hidden; width: 100%; aspect-ratio: 16 / 9; border-radius: 14px; background: #10151f; }
+.trailer-frame iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+.trailer-unavailable { padding: 30px; border: 1px dashed rgba(255,255,255,.1); border-radius: 12px; }
+
 @media (max-width: 900px) {
   .movie-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .detail-layout { grid-template-columns: minmax(180px, 280px) minmax(0, 1fr); gap: 26px; }
 }
 
 @media (max-width: 620px) {
@@ -87,4 +104,6 @@
   .result-count { align-self: center; }
   .movie-grid { grid-template-columns: 1fr; }
   .poster-wrap { height: 390px; }
+  .detail-layout { grid-template-columns: 1fr; }
+  .detail-poster { max-width: 300px; max-height: 420px; }
 }

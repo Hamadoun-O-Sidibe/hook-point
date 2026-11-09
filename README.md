@@ -1,6 +1,6 @@
 # MOVIEBOX
 
-Application React de gestion de films, avec ajout, modification, suppression, filtres et persistance locale.
+Application React de gestion de films, avec ajout, modification, suppression, filtres et persistance locale. Chaque film possède une description et un lien intégré de bande-annonce ; sélectionnez une carte pour ouvrir ses détails.
 
 ## Développement
 
